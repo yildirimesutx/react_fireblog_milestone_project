@@ -1,22 +1,24 @@
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+
 import  "./Login.css"
 import blogImg  from "../assets/blok.png"
 import { useState } from 'react'
-import google from "../assets/google.png"
+import { useNavigate } from 'react-router-dom'
+import { createUser } from '../helpers/firebase'
 
 const Register = () => {
 
 const [email, setEmail] = useState()
 const [password, setPassword] = useState()
+const navigate = useNavigate()
 
 const handleSubmit = (e)=>{
   e.preventDefault()
+  createUser(email, password, navigate)
+  console.log(email, password);
 }
 
-const handleLogin = ()=>{
-  
-}
+
+
 
 return (
   <div className='main'>
@@ -26,11 +28,11 @@ return (
 
    <form onSubmit={handleSubmit}>
   <div class="mb-3">
-    <input type="email"   className="form-control mt-5 mb-4"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Email'/>
+    <input type="email"   className="form-control mt-5 mb-4"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Email' onChange={(e)=>setEmail(e.target.value)}/>
   </div>
   <div class="mb-3">
    
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder='Password'/>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder='Password' onChange={(e)=>setPassword(e.target.value)}/>
   </div>
 
   <input

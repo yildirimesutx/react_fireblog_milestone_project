@@ -4,14 +4,19 @@ import  "./Login.css"
 import blogImg  from "../assets/blok.png"
 import { useState } from 'react'
 import google from "../assets/google.png"
+import { signInAnonymously } from 'firebase/auth'
+import { signIn } from '../helpers/firebase'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
 const [email, setEmail] = useState()
 const [password, setPassword] = useState()
+const navigate = useNavigate()
 
 const handleSubmit = (e)=>{
   e.preventDefault()
+  signIn(email, password, navigate)
 }
 
 const handleLogin = ()=>{
@@ -26,11 +31,11 @@ return (
 
    <form onSubmit={handleSubmit}>
   <div class="mb-3">
-    <input type="email"   className="form-control mt-5 mb-4"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Email'/>
+    <input type="email"   className="form-control mt-5 mb-4"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Email' onChange={(e)=>setEmail(e.target.value)}/>
   </div>
   <div class="mb-3">
    
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder='Password'/>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder='Password' onChange={(e)=>setPassword(e.target.value)}/>
   </div>
 
   <input
@@ -51,63 +56,3 @@ return (
 )
 }
 export default Login
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import blogImg  from "../assets/blok.png"
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
-// import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
-// import  "./Login.css"
-
-// const Login = () => {
-//   return (
-//       <div className='container'>
-//     <div className='loginCard'>
-//         <img src={blogImg} alt="" />
-//         <h3>LOGIN</h3>
-//         <Box
-//       component="form"
-//       sx={{
-//         '& > :not(style)': { m: 1, width: '25ch' },
-//       }}
-//       noValidate
-//       autoComplete="off"
-//     >
-//       <TextField id="outlined-basic" label="Email" variant="outlined" required />
-//       <TextField id="outlined-basic" label="Password" variant="outlined" required />
-//       </Box>
-//       <Stack spacing={2} direction="row">
-  
-//       <Button variant="contained">Login</Button>
-//       <Button variant="contained">With Google</Button>
-//         </Stack>
-
-
-
-//      </div>
-//     </div>
-//   )
-// }
-
-// export default Login
