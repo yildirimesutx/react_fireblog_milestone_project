@@ -15,7 +15,8 @@ import "./Navbar.css"
 // import { NavLink } from 'react-router-dom'
 import logo from "../assets/cw.jpeg"
 import { NavLink } from 'react-router-dom';
-
+import { AuthContext } from '../contexts/AuthContext';
+import { useContext } from 'react';
 
 
  
@@ -42,7 +43,8 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
-  const user = false
+const {currentUser} =   useContext(AuthContext)
+// context içerisinde tanımladığımız stateti kullanmak istediğimizde ilk önce hangi sayfada yapıldısa o sayfayı import ediyoruz, sonra useContext i tanımlıyoruz, ve hangi state kullanılacaksa onu  alıyoruz ve usecontext içine ilgili sayfanınismini yazıyoruz
 
   return (
     <AppBar  position="static">
@@ -77,7 +79,7 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-            {user ? (
+            {currentUser ? (
               settings.map((setting) => (
                <NavLink to={"/"+setting.toLocaleLowerCase()} key={setting} onClick={handleCloseUserMenu}>
               <Typography textAlign="center">{setting}</Typography>

@@ -39,7 +39,7 @@ export const signIn = async (email,
   try {
     let userCredential = await signInWithEmailAndPassword(auth, email, password)
     navigate("/dashboard")
-
+    console.log(userCredential)
   } catch (err) {
     alert(err.message)
   }
@@ -62,9 +62,6 @@ export const userObserver = (setCurrentUser)=>{
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
       setCurrentUser(currentUser)
-
-
-
     } else {
       setCurrentUser(false)
     }

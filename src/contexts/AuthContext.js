@@ -19,7 +19,7 @@ useEffect(() => {
 
 
     return (
-   <AuthContext.Provider value={currentUser}>
+   <AuthContext.Provider value={{currentUser}}>
 {/* yukarıda belirtilen value sabit olarak gelmekte aşağıda belirtilen children olarak sarmarlanan tm componentlere value değeri gönderilmiş oluyor  */}
      {children}
 
