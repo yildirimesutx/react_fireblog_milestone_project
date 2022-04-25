@@ -11,10 +11,15 @@
     display: flex;
     justify-content: space-between;
     width:100%;
+    
 }
 h1{
     color: white;
     text-decoration: none;
     font-family: 'Girassol', cursive;
+}
+
+.bar{
+    background-color: aquamarine;
 }
 

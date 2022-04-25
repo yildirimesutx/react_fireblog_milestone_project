@@ -77,21 +77,18 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-             
-            
-
-         {register.map((setting) => (
-
-        <NavLink to={"/"+setting.toLocaleLowerCase()} key={setting} onClick={handleCloseUserMenu}>
-         <Typography textAlign="center">{setting}</Typography>
-        </NavLink>
-          ))}
-           
-               {settings.map((setting) => (
-                <NavLink to={"/"+setting.toLocaleLowerCase()} key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-               </NavLink>
-              ))}
+            {user ? (
+              settings.map((setting) => (
+               <NavLink to={"/"+setting.toLocaleLowerCase()} key={setting} onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">{setting}</Typography>
+              </NavLink> ))
+            ) : (
+              register.map((setting) => (
+                <  NavLink to={"/"+setting.toLocaleLowerCase()} key={setting} onClick={handleCloseUserMenu}>
+                 <Typography textAlign="center">{setting}</Typography>
+                </NavLink>
+                  ))
+            ) }
             </Menu>
           </Box>
         </Toolbar>
