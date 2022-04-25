@@ -42,7 +42,7 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
-  const user = true
+  const user = false
 
   return (
     <AppBar  position="static">

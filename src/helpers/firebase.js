@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -44,3 +44,31 @@ export const signIn = async (email,
     alert(err.message)
   }
 }
+
+export const logOut =()=>{
+  signOut(auth);
+  alert("logged out successfully");
+}
+
+
+
+// kayıtlı olan user i takip ediyor ve logout olup olmadığı sayfadaki yeni kullanıcı girişini takip ediyor
+
+//  burada belirtilen currentUser vesetCurrentuser i context yapıdan çağırıyoruz, 
+
+
+
+export const userObserver = (setCurrentUser)=>{
+  onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      setCurrentUser(currentUser)
+
+
+
+    } else {
+      setCurrentUser(false)
+    }
+  });
+}
+
+
