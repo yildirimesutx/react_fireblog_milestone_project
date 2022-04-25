@@ -5,7 +5,7 @@ import blogImg  from "../assets/blok.png"
 import { useState } from 'react'
 import google from "../assets/google.png"
 import { signInAnonymously } from 'firebase/auth'
-import { signIn } from '../helpers/firebase'
+import { signIn, signUpProvider } from '../helpers/firebase'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -19,8 +19,8 @@ const handleSubmit = (e)=>{
   signIn(email, password, navigate)
 }
 
-const handleLogin = ()=>{
-  
+const handleProviderLogin = ()=>{
+  signUpProvider(navigate)
 }
 
 return (
@@ -48,7 +48,7 @@ return (
 
 </form>
 
-<button className='btn btn-primary form-control mt-3'>Continue with Google</button>
+<button className='btn btn-primary form-control mt-3' onClick={handleProviderLogin} >Continue with Google</button>
 
 </div> 
 </div>

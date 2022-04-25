@@ -14,9 +14,11 @@ import MenuItem from '@mui/material/MenuItem';
 import "./Navbar.css"
 // import { NavLink } from 'react-router-dom'
 import logo from "../assets/cw.jpeg"
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { useContext } from 'react';
+import { logOut } from '../helpers/firebase';
+
 
 
  
@@ -24,6 +26,9 @@ const settings = ['Profile', 'New', 'Logout'];
 const register = ['Login', 'Register']
 
 const Navbar = () => {
+
+  const navigate = useNavigate()
+
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -35,12 +40,18 @@ const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    if(e.target.innerText === "Logout"){
+      logOut()
+     
+    }else{
     setAnchorElUser(null);
+   }
   };
 
 const {currentUser} =   useContext(AuthContext)
@@ -81,7 +92,7 @@ const {currentUser} =   useContext(AuthContext)
             >
             {currentUser ? (
               settings.map((setting) => (
-               <NavLink to={"/"+setting.toLocaleLowerCase()} key={setting} onClick={handleCloseUserMenu}>
+               <NavLink to={"/"+setting.toLocaleLowerCase()} key={setting} onClick={(e)=>handleCloseUserMenu(e)}>
               <Typography textAlign="center">{setting}</Typography>
               </NavLink> ))
             ) : (
