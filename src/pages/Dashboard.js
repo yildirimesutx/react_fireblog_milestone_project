@@ -21,19 +21,20 @@ const Dashboard = () => {
 
 
   return (
-    <div>
+    <div >
       <h1 style={{color:"blue", marginTop:"3rem"}}> ──  Dashboard  ── </h1>
-
+      <div className='blog_card'>
       {isLoading ? (
-        <img src={loading} alt="loading" />
+        <img src={loading} alt="loading" className='loading' />
       ):
       contentCard?.length=== 0 ?
       
       ( <p style={{color:"black",fontSize:"20px"}}>Gösterilecek blog yazısı yok, haydi bir yazı yazalım..</p>
       ):(
+       
         contentCard?.map((item,index)=>(
-          <div key={index}>
-           <Card sx={{ maxWidth: 345 }}>
+          <div className='card' key={index}>
+           <Card sx={{ maxWidth: 345, maxHeight:500 }}>
           <img src={item.image} alt={item.title} />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
@@ -54,7 +55,9 @@ const Dashboard = () => {
       </Card>
           </div>
         ))
+      
       )}
+      </div>
     </div>
   );
 }
