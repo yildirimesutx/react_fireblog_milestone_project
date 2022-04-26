@@ -8,40 +8,54 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import NewBlog from './NewBlog';
+import {  useFetch } from '../helpers/firebase';
+import loading from "../assets/loading.gif"
 
 
 
 
-const Dashboard = ({title, ImageUrl, content}) => {
- 
+const Dashboard = () => {
+
+  const {isLoading, contentCard} = useFetch()
 
 
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        height="194"
-        image={ImageUrl}
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-         {title}
-        </Typography>
-      </CardContent>
+    <div>
+      <h1 style={{color:"blue", marginTop:"3rem"}}> ──  Dashboard  ── </h1>
 
-
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
+      {isLoading ? (
+        <img src={loading} alt="loading" />
+      ):
+      contentCard?.length=== 0 ?
       
-    </Card>
+      ( <p style={{color:"black",fontSize:"20px"}}>Gösterilecek blog yazısı yok, haydi bir yazı yazalım..</p>
+      ):(
+        contentCard?.map((item,index)=>(
+          <div key={index}>
+           <Card sx={{ maxWidth: 345 }}>
+          <img src={item.image} alt={item.title} />
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+           {item.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+           {item.content}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+          </div>
+        ))
+      )}
+    </div>
   );
 }
 

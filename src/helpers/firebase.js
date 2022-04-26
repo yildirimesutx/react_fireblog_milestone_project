@@ -3,7 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 
-import { getDatabase, push, ref, set } from "firebase/database";
+import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import { useEffect, useState } from "react";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -91,6 +92,11 @@ export const signUpProvider = (navigate)=>{
 
 // Get a database reference
 
+
+//* database veri gönderme, 
+// "myblog" realtime da oluşturduğımuz linkin sonuna verdiğimiz uzantı.AddContent func nunu ilgili form func içerisine yazıyoruz
+
+
 export const AddContent = (title,imageUrl, content)=>{
   const db= getDatabase();
   const contentRef= ref(db, "myblog")
@@ -101,4 +107,36 @@ export const AddContent = (title,imageUrl, content)=>{
     content :content,
   })
 }
+
+
+// * bigi çağırma
+
+export const  useFetch =()=>{
+  const [isLoading, setIsLoading] = useState()
+  const [contentCard, setContentCard] = useState()
+
+  useEffect(() => {
+    setIsLoading(true)
+
+    const db= getDatabase();
+  const contentRef= ref(db, "myblog")
+
+  onValue(contentRef, (snapshot)=>{
+    const data = snapshot.val()
+    const myblogArray=[]
+   
+    for (let id in data){
+      myblogArray.push({id, ...data[id]})
+    }
+    setContentCard(myblogArray)
+    setIsLoading(false)
+
+
+  })
+   
+  }, [])
+  return {isLoading,contentCard }
+  
+}
+
 
