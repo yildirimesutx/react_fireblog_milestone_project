@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+
+import { getDatabase, push, ref, set } from "firebase/database";
+
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -84,4 +89,16 @@ export const signUpProvider = (navigate)=>{
   });
 }
 
+// Get a database reference
+
+export const AddContent = (title,imageUrl, content)=>{
+  const db= getDatabase();
+  const contentRef= ref(db, "myblog")
+  const newContentRef = push(contentRef)
+  set((newContentRef),{
+    title : title,
+    image :imageUrl,
+    content :content,
+  })
+}
 

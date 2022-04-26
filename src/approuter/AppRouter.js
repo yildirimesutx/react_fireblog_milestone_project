@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Dashboard from "../pages/Dashboard"
+import NewBlog from '../pages/NewBlog'
 
 
 const AppRouter = () => {
@@ -17,6 +18,7 @@ const AppRouter = () => {
               <Route path='/register' element={<Register/>}/>
               <Route path='/dashboard' element={<Dashboard/>}/>
               <Route path='/logout' element={<Login/>}/>
+              <Route path='/new' element={<NewBlog/>}/>
           </Routes>
     </Router>
   )
