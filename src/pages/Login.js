@@ -17,6 +17,7 @@ const navigate = useNavigate()
 const handleSubmit = (e)=>{
   e.preventDefault()
   signIn(email, password, navigate)
+  
 }
 
 const handleProviderLogin = ()=>{
@@ -40,7 +41,7 @@ return (
 
   <input
             type="submit"
-            className="btn btn-primary form-control mt-5"
+            className="btn btn-secondary form-control mt-5"
             value="Login"
             
             // onSubmit={handleSubmit}
@@ -48,7 +49,7 @@ return (
 
 </form>
 
-<button className='btn btn-primary form-control mt-3' onClick={handleProviderLogin} >Continue with Google</button>
+<button className='btn btn-secondary form-control mt-3' onClick={handleProviderLogin}> Continue with     <img src="https://seeklogo.com/images/G/google-2015-new-logo-D28485E83C-seeklogo.com.png" alt="" style={{width:"70px"}} /></button>
 
 </div> 
 </div>

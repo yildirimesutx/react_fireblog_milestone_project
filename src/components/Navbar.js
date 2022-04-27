@@ -18,6 +18,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { useContext } from 'react';
 import { logOut } from '../helpers/firebase';
+import Toastify from '../helpers/toastNotify';
 
 
 
@@ -48,6 +49,7 @@ const Navbar = () => {
   const handleCloseUserMenu = (e) => {
     if(e.target.innerText === "Logout"){
       logOut()
+      // Toastify("success")
      
     }else{
     setAnchorElUser(null);

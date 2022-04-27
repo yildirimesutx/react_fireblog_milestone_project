@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import { useEffect, useState } from "react";
+import Toastify from "./toastNotify";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -45,6 +46,7 @@ export const signIn = async (email,
   try {
     let userCredential = await signInWithEmailAndPassword(auth, email, password)
     navigate("/dashboard")
+    Toastify("success")
     console.log(userCredential)
   } catch (err) {
     alert(err.message)
@@ -53,8 +55,8 @@ export const signIn = async (email,
 
 export const logOut =()=>{
   signOut(auth);
- 
-  alert("logged out successfully");
+  Toastify("logged out successfully")
+  // alert("logged out successfully");
 }
 
 
@@ -78,12 +80,14 @@ export const userObserver = (setCurrentUser)=>{
 
 // https://firebase.google.com/docs/auth/web/google-signin
 
-export const signUpProvider = (navigate)=>{
+export const signUpProvider = (navigate, msg)=>{
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
   .then((result) => {
     console.log(result);
    navigate("/dashboard")
+
+   Toastify("success")
 
   }).catch((error) => {
      console.log(error);
