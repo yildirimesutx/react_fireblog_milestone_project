@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {Box, Stack,TextareaAutosize, Button } from '@mui/material/';
 import TextField from '@mui/material/TextField';
 import blogImg  from "../assets/blok.png"
 import { AddContent } from '../helpers/firebase';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 const NewBlog = () => {
@@ -12,12 +13,12 @@ const NewBlog = () => {
   const [imageUrl, setImageUrl]= useState()
   const [content, setContent]= useState()
   const navigate = useNavigate()
-
+ const {currentUser} = useContext(AuthContext)
 
 const handleFormSubmit = (e)=>{
       e.preventDefault()
       console.log(title, imageUrl, content);
-      AddContent(title, imageUrl, content)
+      AddContent(title, imageUrl, content,  new Date().toLocaleString("tr-TR"), currentUser.email)
       navigate("/dashboard")
 }
 

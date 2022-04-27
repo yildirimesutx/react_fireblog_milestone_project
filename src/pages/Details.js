@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { BlogContext } from '../contexts/BlogContext'
 
 const Details = () => {
+
+  const {detail} = useContext(BlogContext)
+ console.log(detail);
+
   return (
-    <div> Details </div>
+    <div>
+
+      <img src={detail.image} alt="" />
+      
+      
+       Details </div>
   )
 }
 

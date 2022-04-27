@@ -8,11 +8,12 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import NewBlog from './NewBlog';
-import {  useFetch } from '../helpers/firebase';
+import {  useFunc } from '../helpers/firebase';
 import loading from "../assets/loading.gif"
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { AccountCircle } from "@mui/icons-material";
+import { BlogContext } from "../contexts/BlogContext";
 // import {ChatBubbleOutlineOutlinedIcon} from "@mui/icons-material";
 // import IconButton from '@mui/material/IconButton';
 // import {email} from    "../pages/Login"
@@ -21,13 +22,23 @@ import { AccountCircle } from "@mui/icons-material";
 
 const Dashboard = () => {
 
-  const {isLoading, contentCard} = useFetch()
+  const {isLoading, contentCard} = useFunc()
   const navigate = useNavigate()
   const { currentUser } = useContext(AuthContext);
 
+  const {setDetail} = useContext(BlogContext)
+  console.log(contentCard);
+
+  const handleDetails =(id, title, image, content)=>{
+      setDetail({id, title, image, content})
+      navigate("/details")
+  }
+
+
+
   return (
     <div className='das_main'>
-      <h1 style={{color:"blue", marginTop:"3rem"}}> ──  Dashboard  ── </h1>
+      <h1 style={{color:"white"}}> ──  Dashboard  ── </h1>
       <div className='blog_card'>
       {isLoading ? (
         <img src={loading} alt="loading" className='loading' />
@@ -38,26 +49,25 @@ const Dashboard = () => {
       ):(
        
         contentCard?.map((item,index)=>(
-          <div className='card' key={index} onClick={()=>currentUser
-            ? navigate("details/")
-            : alert("Please log in to see details")}>
-           <Card sx={{ maxWidth: 345, maxHeight:500 }} >
+          <div className='card' key={index} onClick={()=>handleDetails(item.id, item.title, item.image, item.content, item.date, item.email)}>
 
-          <img src={item.image} alt={item.title} />
+
+           <Card className="card_mui"  >
+           {/* sx={{ maxWidth: 345, maxHeight:500 }} */}
+          <img className="brand_logo" src={item.image} alt={item.title} />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-           {item.title}
-          </Typography>
+
+          <h5 className="brand_title" > {item.title}</h5>
+         
           <Typography variant="body2" color="text.secondary">
           {item.content}
           </Typography>
         </CardContent>
 
-        
-
+      
          <CardContent>
          <Typography variant="body2" color="text.secondary">
-         <AccountCircle/>{item.date}
+         <AccountCircle/>{item.date}{item.email}
           </Typography>
 
 

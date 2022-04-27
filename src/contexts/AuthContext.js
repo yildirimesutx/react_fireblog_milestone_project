@@ -20,7 +20,7 @@ useEffect(() => {
 
     return (
    <AuthContext.Provider value={{currentUser}}>
-{/* yukarıda belirtilen value sabit olarak gelmekte aşağıda belirtilen children olarak sarmarlanan tm componentlere value değeri gönderilmiş oluyor  */}
+{/* yukarıda belirtilen value sabit olarak gelmekte aşağıda belirtilen children olarak sarmarlanan tm componentlere value değeri gönderilmiş oluyor. value içerisine yazdığımız state, func lar istenilen tüm sayfalarda kullanılabilir. kısacası value ortak kullanılmak istenilenler  */}
      {children}
 
 

@@ -101,7 +101,7 @@ export const signUpProvider = (navigate, msg)=>{
 // "myblog" realtime da oluşturduğımuz linkin sonuna verdiğimiz uzantı.AddContent func nunu ilgili form func içerisine yazıyoruz
 
 
-export const AddContent = (title,imageUrl, content)=>{
+export const AddContent = (title,imageUrl, content, date, email)=>{
   const db= getDatabase();
   const contentRef= ref(db, "myblog")
   const newContentRef = push(contentRef)
@@ -109,13 +109,15 @@ export const AddContent = (title,imageUrl, content)=>{
     title : title,
     image :imageUrl,
     content :content,
+    date : date,
+    email:email,
   })
 }
 
 
 // * bigi çağırma
 
-export const  useFetch =()=>{
+export const  useFunc =()=>{
   const [isLoading, setIsLoading] = useState()
   const [contentCard, setContentCard] = useState()
 
