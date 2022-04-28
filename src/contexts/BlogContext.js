@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-import { useFunc } from "../helpers/firebase";
+import { useFunc, EditBlog } from "../helpers/firebase";
 
 export const BlogContext = createContext()
 
@@ -14,11 +14,14 @@ export const BlogContext = createContext()
 
 const BlogContextProvider = ({children}) =>{
     const [detail,setDetail] = useState([])
+    const [update, setUpdate] = useState(false)
+
+
 
 
 
     return (
-        <BlogContext.Provider value={{detail,setDetail, useFunc }}>
+        <BlogContext.Provider value={{detail,setDetail, useFunc, update, setUpdate }}>
     
           {children}
 

@@ -161,10 +161,10 @@ export const DeleteBlog = (id)=>{
 
 // update 
 
-export const EditBlog=(id,title, image, content)=>{
+export const EditBlog=(detail)=>{
   const db= getDatabase();
   const updates = {};
 
-  updates["myblog/", id] = (id,title, image, content)
+  updates["/myblog/"+detail.id] = detail;
    return update(ref(db), updates)
 }

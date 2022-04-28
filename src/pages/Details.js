@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import { BlogContext } from '../contexts/BlogContext'
 import {AuthContext} from "../contexts/AuthContext"
 import { useNavigate } from 'react-router-dom'
-import {DeleteBlog, EditBlog} from "../helpers/firebase"
+import {DeleteBlog} from "../helpers/firebase"
 
 const Details = () => {
 
   const navigate = useNavigate()
-  const {detail} = useContext(BlogContext)
+  const {detail, setdetail} = useContext(BlogContext)
   const {currentUser} = useContext(AuthContext)
- console.log(detail);
+  const {update, setUpdate} = useContext(BlogContext)
 
 
  const handleDelete = (id)=>{
@@ -18,8 +18,8 @@ const Details = () => {
 }
 
 const handleUpdate = (id, title, image, content)=>{
-  EditBlog(id, title, image, content)
-  navigate("/update")
+  setUpdate(id, title, image, content)
+  navigate("/update/+id")
 
 }
 
