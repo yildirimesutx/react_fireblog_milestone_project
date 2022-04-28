@@ -33,6 +33,7 @@
 .brand_logo{
     width: 10rem;
     height: 10rem;
+    cursor: pointer;
 }
 
 .card_mui{
@@ -46,6 +47,17 @@
     font-weight: 500;
     margin-bottom: 1rem;
     text-transform: capitalize;
+}
+
+.content{
+    /* white-space: nowrap; */
+    height: 6rem;
+    width: 18rem;
+    /* background-color: #1976D2; */
+    /* border: 1px solid rgb(104, 97, 97) ; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
 
@@ -82,5 +94,18 @@
     text-align: center;
     justify-content: center;
     align-items: baseline;
+}
+
+
+
+.detail_box{
+    margin: 5rem auto;
+    /* width: 80rem; */
+}
+
+.detail_box_content{
+    width:30rem;
+   /* text-align:center; */
+   margin: 2rem auto;
 }
 

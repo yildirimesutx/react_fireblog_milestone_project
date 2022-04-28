@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 
-import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import { getDatabase, onValue, push, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import Toastify from "./toastNotify";
 
@@ -94,6 +94,9 @@ export const signUpProvider = (navigate, msg)=>{
   });
 }
 
+
+
+
 // Get a database reference
 
 
@@ -146,3 +149,22 @@ export const  useFunc =()=>{
 }
 
 
+// * delete data
+
+export const DeleteBlog = (id)=>{
+  const db= getDatabase();
+
+  const contentRef= ref(db, "myblog")
+  remove(ref(db, "myblog/"+id))
+} 
+
+
+// update 
+
+export const EditBlog=(id,title, image, content)=>{
+  const db= getDatabase();
+  const updates = {};
+
+  updates["myblog/", id] = (id,title, image, content)
+   return update(ref(db), updates)
+}

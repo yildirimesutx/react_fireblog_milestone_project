@@ -29,8 +29,8 @@ const Dashboard = () => {
   const {setDetail} = useContext(BlogContext)
   console.log(contentCard);
 
-  const handleDetails =(id, title, image, content)=>{
-      setDetail({id, title, image, content})
+  const handleDetails =(id, title, image, content, date, email)=>{
+      setDetail({id, title, image, content, date, email})
       navigate("/details")
   }
 
@@ -49,25 +49,25 @@ const Dashboard = () => {
       ):(
        
         contentCard?.map((item,index)=>(
-          <div className='card' key={index} onClick={()=>handleDetails(item.id, item.title, item.image, item.content, item.date, item.email)}>
-
-
+          <div className='card' key={index} >
            <Card className="card_mui"  >
-           {/* sx={{ maxWidth: 345, maxHeight:500 }} */}
-          <img className="brand_logo" src={item.image} alt={item.title} />
+          <img className="brand_logo" src={item.image} alt={item.title}  onClick={()=>handleDetails(item.id, item.title, item.image, item.content, item.date, item.email)}/>
         <CardContent>
 
-          <h5 className="brand_title" > {item.title}</h5>
-         
-          <Typography variant="body2" color="text.secondary">
-          {item.content}
+        <h5 className="brand_title" >{item.title}</h5>
+         <div className="content">
+          <Typography >
+          {item.content} 
           </Typography>
+          </div>
         </CardContent>
+        <Typography variant="body2" color="text.secondary">
+        {item.date}
+          </Typography>
 
-      
          <CardContent>
          <Typography variant="body2" color="text.secondary">
-         <AccountCircle/>{item.date}{item.email}
+         <AccountCircle/>{item.email}
           </Typography>
 
 
