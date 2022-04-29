@@ -5,7 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 
 import { getDatabase, onValue, push, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
-import Toastify from "./toastNotify";
+import {Toastify} from "./toastNotify";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -164,7 +164,7 @@ export const DeleteBlog = (id)=>{
 export const EditBlog=(detail)=>{
   const db= getDatabase();
   const updates = {};
-
+  
   updates["/myblog/"+detail.id] = detail;
    return update(ref(db), updates)
 }

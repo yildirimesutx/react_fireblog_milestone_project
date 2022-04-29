@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
@@ -9,8 +9,11 @@ import NewBlog from '../pages/NewBlog'
 import Details from '../pages/Details'
 import UpdateBlog from '../pages/UpdateBlog'
 
+import PrivateRouter from './PrivateRouter'
 
 const AppRouter = () => {
+
+ 
   return (
     <Router>
         <Navbar/>
@@ -21,7 +24,11 @@ const AppRouter = () => {
               <Route path='/dashboard' element={<Dashboard/>}/>
               <Route path='/logout' element={<Login/>}/>
               <Route path='/new' element={<NewBlog/>}/>
+
+              <Route element={<PrivateRouter />}>
               <Route path='/details' element={<Details/>}/>
+              </Route>
+
               <Route path='/update' element={<UpdateBlog/>}/>
           </Routes>
     </Router>

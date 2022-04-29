@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { BlogContext } from '../contexts/BlogContext';
 import { EditBlog } from '../helpers/firebase';
-
+import {toastSuccessNotify} from "../helpers/toastNotify"
 
 const UpdateBlog = () => {
 
@@ -16,14 +16,23 @@ const UpdateBlog = () => {
   const [content, setContent]= useState()
   const navigate = useNavigate()
  const {currentUser} = useContext(AuthContext)
- const {detail, setDetail}   = useContext(BlogContext)
+ const {detail, setDetail, setUpdate}   = useContext(BlogContext)
 
+
+const handleChange = (e)=>{
+  e.preventDefault();
+  const {name, value} = e.target 
+  setDetail({...detail, [name]:value,["date"]:new Date().toLocaleString("tr-TR")})
+}
+
+console.log(detail);
 const handleFormSubmit = (e)=>{
       e.preventDefault()
-    if(detail.id){
+    
+      if(detail.id){
       EditBlog(detail) 
-      // setDetail(id.detail, title.detail, image.detail, content.detail, date.detail, email.detail)
-
+      toastSuccessNotify("Update blog successfully")
+      console.log("deneme");
     }else{
       AddContent(title, imageUrl, content,  new Date().toLocaleString("tr-TR"), currentUser.email)
     }
@@ -31,17 +40,7 @@ const handleFormSubmit = (e)=>{
 }
 
 
-// const handleFormSubmit = (e)=>{
-//   e.preventDefault();
-//   if(detail.id){
-//     setUpdate(false)
-//     EditBlog(detail)
-    
-//   }
-// else{
-//   AddContent(detail)
-// }
-// }
+
 
   return (
           <div  style={{backgroundImage: "url(https://picsum.photos/1600/900/)", backgroundSize:"cover", backgroundRepeat:"no-repeat", height:"93vh", marginTop:"0px", padding:"40px"}}>
@@ -55,11 +54,24 @@ const handleFormSubmit = (e)=>{
            <Stack direction="column" textAlign="center" justifyContent="center"
             alignItems="center">
 
-           <TextField id="outlined-basic" label="Title" variant="outlined" sx={{ m: 1, width: '50ch'}} required onChange={(e)=>setTitle(e.target.value)}
+           <TextField 
+           id="outlined-basic" 
+           label="Title" 
+           variant="outlined" 
+           sx={{ m: 1, width: '50ch'}} 
+           required 
+           onChange={handleChange}
+           name="title"
            value={detail.title}
            />
 
-           <TextField id="outlined-basic" label="Image URL" variant="outlined" required sx={{ m:1, width: '50ch'}} onChange={(e)=>setImageUrl(e.target.value)}
+           <TextField 
+           id="outlined-basic" 
+           label="Image URL" 
+           variant="outlined" 
+           required sx={{ m:1, width: '50ch'}} 
+           name="image"
+           onChange={handleChange}
            value={detail.image}
            />
 
@@ -68,7 +80,8 @@ const handleFormSubmit = (e)=>{
                minRows={8}
                placeholder="Content" required
                style={{ width: '50ch', m:2 }}
-               onChange={(e)=>setContent(e.target.value)}
+               name="content"
+               onChange={handleChange}
                value={detail.content}
             />
 

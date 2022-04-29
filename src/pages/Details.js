@@ -17,8 +17,8 @@ const Details = () => {
   DeleteBlog(id)
 }
 
-const handleUpdate = (id, title, image, content)=>{
-  setDetail({id, title, image, content})
+const handleUpdate = (id, title, image, content, date, email)=>{
+  setDetail({id, title, image, content, date, email})
   navigate("/update")
 
 }
@@ -41,7 +41,7 @@ const handleUpdate = (id, title, image, content)=>{
    {  currentUser.email===detail.email ? (
       <div>
 
-<button onClick={()=>handleUpdate(detail.id, detail.title, detail.image, detail.content)}  type="button" class="btn btn-primary btn-sm m-2">UPDATE</button>
+<button onClick={()=>handleUpdate(detail.id, detail.title, detail.image, detail.content,detail.date, detail.email)}  type="button" class="btn btn-primary btn-sm m-2">UPDATE</button>
 <button onClick={()=>handleDelete(detail.id)} type="button" class="btn btn-secondary btn-sm">DELETE</button>
       
       </div>
