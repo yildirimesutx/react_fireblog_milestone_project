@@ -8,7 +8,7 @@ import Dashboard from "../pages/Dashboard"
 import NewBlog from '../pages/NewBlog'
 import Details from '../pages/Details'
 import UpdateBlog from '../pages/UpdateBlog'
-
+import Profile from "../pages/Profile"
 import PrivateRouter from './PrivateRouter'
 
 const AppRouter = () => {
@@ -30,6 +30,8 @@ const AppRouter = () => {
               </Route>
 
               <Route path='/update' element={<UpdateBlog/>}/>
+
+              <Route path='/profile' element={<Profile/>}/>
           </Routes>
     </Router>
   )

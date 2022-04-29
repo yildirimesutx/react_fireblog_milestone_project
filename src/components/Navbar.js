@@ -72,7 +72,16 @@ const {currentUser} =   useContext(AuthContext)
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar src="/broken-image.jpg" />
+             
+             {currentUser?.photoURL ? ( <img src={currentUser?.photoURL} alt=""
+             style={{borderRadius:"50%", width:"3rem",height:"3rem"}}
+             /> ):(<Avatar src="/broken-image.jpg" />)}
+
+
+
+
+
+              
                
               </IconButton>
             </Tooltip>
