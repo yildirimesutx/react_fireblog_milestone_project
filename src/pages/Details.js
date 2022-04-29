@@ -7,9 +7,9 @@ import {DeleteBlog} from "../helpers/firebase"
 const Details = () => {
 
   const navigate = useNavigate()
-  const {detail, setdetail} = useContext(BlogContext)
+  const {detail} = useContext(BlogContext)
   const {currentUser} = useContext(AuthContext)
-  const {update, setUpdate} = useContext(BlogContext)
+  const {setDetail} = useContext(BlogContext)
 
 
  const handleDelete = (id)=>{
@@ -18,8 +18,8 @@ const Details = () => {
 }
 
 const handleUpdate = (id, title, image, content)=>{
-  setUpdate(id, title, image, content)
-  navigate("/update/+id")
+  setDetail({id, title, image, content})
+  navigate("/update")
 
 }
 
