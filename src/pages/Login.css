@@ -4,6 +4,7 @@
    background-repeat:no-repeat ;
    background-size:cover;
    padding-top: 3rem;
+   /* margin: auto; */
 
 }
 
@@ -11,12 +12,14 @@
 
 .blog_card{
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+  /* flex-direction: row; */
+  /* flex-wrap: wrap; */
   /* grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto; */
+  justify-content: center;
 
-  margin: 5rem;
+  margin:  auto;
 }
 .loading{
     margin: 10px auto;
